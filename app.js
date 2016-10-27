@@ -1,7 +1,7 @@
 (function (window) {
 
   var nav = document.querySelector('nav'),
-  	feedOption = nav.querySelectorAll('.feed'),
+    feedOption = nav.querySelectorAll('.feed'),
     feedTitle = document.querySelector('.feed-title'),
     feedContainer = document.querySelector('.news-feed'),
     feedItem = [],
@@ -15,20 +15,20 @@
     return currentEl;
   }
 
-	// Retireves an array of articles IDs or articles the user has clicked on
+  // Retireves an array of articles IDs or articles the user has clicked on
   function retrieveLocalStorage() {
     contentIdArr = JSON.parse(localStorage.getItem('articleRead'));
   }
 
-	// If the user clicks on an article its ID is stored in local storage
+  // If the user clicks on an article its ID is stored in local storage
   function saveLocalStorage(e) {
     var closestItem = closestClass(e.target, 'item')
-    	contentId = closestItem.dataset.id;
+      contentId = closestItem.dataset.id;
     
     closestItem.dataset.visited = true;
     
     retrieveLocalStorage();
-	  
+    
     contentIdArr = contentIdArr || [];
     contentIdArr.push(contentId);
 
@@ -38,7 +38,7 @@
 
   function getFeedData() {
     var slug = this.dataset.slug;
-    	
+      
     feedTitle.textContent = this.dataset.title;
     
     feedContainer.innerHTML = '';
@@ -64,27 +64,27 @@
             follow = '',
             visited = false;
 
-					// Mark if user has visited this article
-					retrieveLocalStorage();
-			    contentIdArr = contentIdArr || [];
+          // Mark if user has visited this article
+          retrieveLocalStorage();
+          contentIdArr = contentIdArr || [];
           if (contentIdArr.indexOf(contentId) > -1) {
             visited = true;
           }
 
-					// Set class and data attributes
+          // Set class and data attributes
           item.setAttribute('class', 'item');
           item.setAttribute('data-visited', visited);
           item.setAttribute('data-id', contentId);
 
-					// Only add an image if there is one
+          // Only add an image if there is one
           if (imageUrl != null || imageUrl != undefined) {
             imageHtml = '<a class="article img-wrap" href="' + articleUrl + '" target="_blank"><img src="' + imageUrl.url + '"></a>'
           } else {
-	          item.setAttribute('data-img', 'no-img');
+            item.setAttribute('data-img', 'no-img');
             imageHtml = '';
           }
-					
-					// Creates a follow button for all screen names
+          
+          // Creates a follow button for all screen names
           for (x = 0; x < screenName.length; x++) {
             follow = follow + '<a class="twitter-follow" href="https://twitter.com/' + screenName[x]+ '">Follow @' + screenName[x] + '</a>';
           }
@@ -96,8 +96,8 @@
         // Setting var feedItem now that it exists 
         feedItem = document.querySelectorAll('.article');
         for (var i = 0; i < feedItem.length; i++) {
-			    feedItem[i].addEventListener('click', saveLocalStorage, false);
-			  }
+          feedItem[i].addEventListener('click', saveLocalStorage, false);
+        }
       },
       error: function () {
         console.log('error');
@@ -106,7 +106,7 @@
   }
   
   function scrollToTop() {
-	  nav.scrollIntoView();
+    nav.scrollIntoView();
   }
 
   for (var i = 0; i < feedOption.length; i++) {
