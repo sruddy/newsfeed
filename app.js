@@ -26,21 +26,16 @@
       contentId = closestItem.dataset.id;
     
     closestItem.dataset.visited = true;
-    
     retrieveLocalStorage();
-    
     contentIdArr = contentIdArr || [];
     contentIdArr.push(contentId);
-
     localStorage.setItem('articleRead', JSON.stringify(contentIdArr));
-    
   }
 
   function getFeedData() {
     var slug = this.dataset.slug;
-      
+
     feedTitle.textContent = this.dataset.title;
-    
     feedContainer.innerHTML = '';
 
     util.ajax({
@@ -83,7 +78,7 @@
             item.setAttribute('data-img', 'no-img');
             imageHtml = '';
           }
-          
+
           // Creates a follow button for all screen names
           for (x = 0; x < screenName.length; x++) {
             follow = follow + '<a class="twitter-follow" href="https://twitter.com/' + screenName[x]+ '">Follow @' + screenName[x] + '</a>';
@@ -92,8 +87,8 @@
           item.innerHTML = imageHtml +'<div class="content"><a class="article" href="' + articleUrl + '" target="_blank"><h2>' + title + '</h2><span class="domain">' + domain + '</span><p class="description">' + description + '</p></a><div class="social">' + follow + '</div></div>';
           feedContainer.appendChild(item);
         }
-        
-        // Setting var feedItem now that it exists 
+
+        // Setting var feedItem now that it exists
         feedItem = document.querySelectorAll('.article');
         for (var i = 0; i < feedItem.length; i++) {
           feedItem[i].addEventListener('click', saveLocalStorage, false);
@@ -104,7 +99,7 @@
       }
     });
   }
-  
+ 
   function scrollToTop() {
     nav.scrollIntoView();
   }
@@ -112,7 +107,7 @@
   for (var i = 0; i < feedOption.length; i++) {
     feedOption[i].addEventListener('click', getFeedData, false);
   }
-  
+
   feedTitle.addEventListener('click', scrollToTop, false);
 
 })(this);
